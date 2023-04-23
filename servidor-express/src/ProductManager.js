@@ -11,10 +11,10 @@ class ProductManager{
 
     generateId(products){
         let newId;
-        if(!products.lenght){
+        if(!products.length){
             newId=1;
         } else{
-            newId=products[products.lenght-1].id+1;
+            newId=products[products.length-1].id+1;
         }
         return newId;
     }
@@ -26,8 +26,8 @@ class ProductManager{
                 const products = JSON.parse(content);
                 const productId = this.generateId(products);
                 product.id = productId;
-                product.push(product);
-                await fs.promises.writeFile(this.path,JSON.stringify(product,null,2));
+                products.push(product);
+                await fs.promises.writeFile(this.path,JSON.stringify([products],null,2));
                 return product;
             } else {
                 const productId = this.generateId([]);
@@ -115,7 +115,7 @@ class ProductManager{
 
 
 //se utiliza la clase
-const manager = new ProductManager("./products.json");
+const manager = new ProductManager("./src/products.json");
 
 const funcionPrincipal=async()=>{
     try{
